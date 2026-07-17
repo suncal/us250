@@ -523,6 +523,114 @@ footer{background:#060B18;border-top:1px solid rgba(201,162,75,.18);padding:clam
 .foot-bottom nav a{font-size:12.5px;color:rgba(239,233,216,.4);transition:color .3s}
 .foot-bottom nav a:hover{color:var(--gold-bright)}
 
+/* ============ LUXE LAYER ============ */
+/* scroll progress */
+#progress{position:fixed;top:0;left:0;height:2px;width:0;z-index:2001;background:linear-gradient(90deg,var(--gold),var(--gold-bright));box-shadow:0 0 12px rgba(232,206,140,.8)}
+/* film grain */
+#grain{position:fixed;inset:-100px;z-index:2000;pointer-events:none;opacity:.05;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23g)'/%3E%3C/svg%3E");
+  animation:grainShift .9s steps(4) infinite;
+}
+@keyframes grainShift{0%{transform:translate(0,0)}25%{transform:translate(-30px,20px)}50%{transform:translate(20px,-30px)}75%{transform:translate(-20px,-20px)}100%{transform:translate(0,0)}}
+/* custom cursor */
+@media(hover:hover) and (pointer:fine){
+  #cursor,#cursorRing{position:fixed;top:0;left:0;pointer-events:none;z-index:2002;border-radius:50%;transform:translate(-50%,-50%)}
+  #cursor{width:7px;height:7px;background:var(--gold-bright)}
+  #cursorRing{width:34px;height:34px;border:1px solid rgba(201,162,75,.55);transition:width .3s var(--ease),height .3s var(--ease),border-color .3s,background .3s}
+  #cursorRing.hovering{width:58px;height:58px;border-color:var(--gold-bright);background:rgba(201,162,75,.08)}
+  body.has-cursor,body.has-cursor a,body.has-cursor button,body.has-cursor select,body.has-cursor input{cursor:none}
+}
+/* hero particles + parallax */
+#embers{position:absolute;inset:0;z-index:1;pointer-events:none}
+.hero-bg{will-change:transform}
+/* headline line reveal */
+.line-mask{display:block;overflow:hidden}
+.line-mask>span{display:block;transform:translateY(115%);transition:transform 1.15s var(--ease)}
+.hero.loaded .line-mask>span{transform:none}
+.hero.loaded .line-mask:nth-child(2)>span{transition-delay:.15s}
+/* gold shimmer on section ems */
+.h2 em{background:linear-gradient(110deg,var(--gold-bright) 20%,#FFF3D6 40%,var(--gold-bright) 60%);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shimmer 5.5s linear infinite}
+.mission .h2 em,.dates .h2 em,.signup .h2 em{background:linear-gradient(110deg,var(--red) 30%,#D9635B 50%,var(--red) 70%);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent}
+@keyframes shimmer{to{background-position:-220% 0}}
+/* tilt cards */
+.exp-card,.artist-card{transform-style:preserve-3d;will-change:transform}
+/* ============ US MAP ============ */
+.map-shell{position:relative;margin-top:clamp(40px,5vw,64px)}
+.usmap{width:100%;height:auto;display:block}
+.usmap path{fill:#22314F;stroke:#0A1428;stroke-width:1;transition:fill .35s,filter .35s;cursor:pointer}
+.usmap path:hover{fill:var(--gold);filter:drop-shadow(0 0 14px rgba(201,162,75,.6))}
+.usmap path.visited{fill:#5B4B23}
+.usmap path.next{fill:var(--red-bright);animation:mapPulse 1.8s ease-in-out infinite}
+@keyframes mapPulse{0%,100%{filter:drop-shadow(0 0 4px rgba(192,57,43,.4))}50%{filter:drop-shadow(0 0 18px rgba(192,57,43,.95))}}
+.map-tip{
+  position:absolute;pointer-events:none;z-index:5;opacity:0;transform:translate(-50%,-130%) scale(.94);
+  transition:opacity .25s,transform .25s var(--ease);
+  background:rgba(10,20,40,.95);border:1px solid rgba(201,162,75,.45);border-radius:4px;
+  padding:12px 18px;white-space:nowrap;backdrop-filter:blur(8px);
+  box-shadow:0 14px 40px rgba(0,0,0,.5);
+}
+.map-tip.show{opacity:1;transform:translate(-50%,-130%) scale(1)}
+.map-tip b{font-family:var(--serif);font-size:16px;color:var(--cream);display:block}
+.map-tip span{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-bright)}
+.map-legend{display:flex;gap:26px;flex-wrap:wrap;justify-content:center;margin-top:26px}
+.leg{display:flex;align-items:center;gap:10px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-dark-dim)}
+.leg i{width:13px;height:13px;border-radius:3px;display:block}
+.leg .l-next{background:var(--red-bright)}.leg .l-visited{background:#5B4B23}.leg .l-soon{background:#22314F}
+.map-hint{text-align:center;margin-top:14px;font-size:13px;font-style:italic;color:rgba(26,36,56,.5)}
+/* ============ MODALS ============ */
+.modal-veil{
+  position:fixed;inset:0;z-index:3000;background:rgba(6,11,24,.75);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  opacity:0;visibility:hidden;transition:opacity .5s var(--ease),visibility .5s;
+  display:flex;align-items:center;justify-content:center;padding:clamp(16px,3vw,44px);
+}
+.modal-veil.open{opacity:1;visibility:visible}
+.modal{
+  width:min(880px,100%);max-height:88vh;overflow-y:auto;border-radius:8px;
+  background:linear-gradient(170deg,#101E3E,#0A1428);border:1px solid rgba(201,162,75,.35);
+  box-shadow:0 60px 140px rgba(0,0,0,.65);
+  transform:translateY(40px) scale(.97);transition:transform .5s var(--ease);
+  scrollbar-width:thin;scrollbar-color:var(--gold-dim) transparent;
+}
+.modal-veil.open .modal{transform:none}
+.modal-hero{position:relative;aspect-ratio:21/9;overflow:hidden;border-radius:8px 8px 0 0}
+.modal-hero img{width:100%;height:100%;object-fit:cover;filter:brightness(.8)}
+.modal-hero::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,#101E3E 2%,transparent 55%)}
+.modal-body{padding:clamp(28px,4vw,52px)}
+.modal-body .eyebrow{margin-bottom:14px}
+.modal-body h3{font-family:var(--serif);font-weight:500;font-size:clamp(28px,3.4vw,44px);color:var(--cream);line-height:1.12;margin-bottom:20px}
+.modal-body h3 em{font-style:italic;color:var(--gold-bright)}
+.modal-body p{font-size:15.5px;line-height:1.85;color:var(--text-dim);margin-bottom:18px}
+.modal-body ul{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:12px 22px;margin:26px 0}
+.modal-body ul li{font-size:14px;line-height:1.6;color:var(--text-dim);padding-left:24px;position:relative}
+.modal-body ul li::before{content:'★';position:absolute;left:0;top:1px;color:var(--gold);font-size:11px}
+.modal-close{
+  position:absolute;top:18px;right:18px;z-index:4;width:44px;height:44px;border-radius:50%;
+  background:rgba(10,20,40,.65);border:1px solid rgba(201,162,75,.45);backdrop-filter:blur(8px);
+  color:var(--cream);font-size:17px;display:flex;align-items:center;justify-content:center;
+  transition:all .35s;cursor:pointer;
+}
+.modal-close:hover{background:var(--gold);color:var(--ink);transform:rotate(90deg)}
+.modal-cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:10px}
+body.modal-open{overflow:hidden}
+/* back to top */
+#toTop{
+  position:fixed;right:26px;bottom:26px;z-index:1500;width:52px;height:52px;border-radius:50%;
+  border:1px solid rgba(201,162,75,.5);background:rgba(10,20,40,.8);backdrop-filter:blur(10px);
+  color:var(--gold-bright);display:flex;align-items:center;justify-content:center;
+  opacity:0;visibility:hidden;transform:translateY(16px);transition:all .45s var(--ease);cursor:pointer;
+}
+#toTop.show{opacity:1;visibility:visible;transform:none}
+#toTop:hover{background:var(--gold);color:var(--ink)}
+/* socials */
+.socials{display:flex;gap:12px;margin-top:26px}
+.socials a{
+  width:40px;height:40px;border-radius:50%;border:1px solid rgba(201,162,75,.3);
+  display:flex;align-items:center;justify-content:center;color:var(--text-dim);transition:all .35s;
+}
+.socials a:hover{border-color:var(--gold);color:var(--gold-bright);transform:translateY(-3px)}
+.socials svg{width:16px;height:16px;fill:currentColor}
+@media(max-width:920px){.modal-body ul{grid-template-columns:1fr}#toTop{right:16px;bottom:16px}}
+
 /* ============ RESPONSIVE ============ */
 @media(max-width:1080px){
   .exp-grid{grid-template-columns:repeat(2,1fr)}
@@ -565,6 +673,11 @@ footer{background:#060B18;border-top:1px solid rgba(201,162,75,.18);padding:clam
 </head>
 <body>
 
+<div id="progress"></div>
+<div id="grain" aria-hidden="true"></div>
+<div id="cursor" aria-hidden="true"></div>
+<div id="cursorRing" aria-hidden="true"></div>
+
 <!-- PRELOADER -->
 <div id="loader">
   <svg class="loader-star" viewBox="0 0 24 24" fill="none"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7L12 17.2 5.8 20.9l1.6-7L2 9.2l7.1-.6L12 2z" fill="#C9A24B"/></svg>
@@ -590,18 +703,19 @@ footer{background:#060B18;border-top:1px solid rgba(201,162,75,.18);padding:clam
       <li><a href="#signup">Sign Up</a></li>
     </ul>
     <div style="display:flex;align-items:center;gap:18px">
-      <a href="#support" class="btn-donate">Donate</a>
+      <a href="https://secure.anedot.com/moms/us250-tour-donations" target="_blank" rel="noopener" class="btn-donate">Donate</a>
       <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
     </div>
   </nav>
 </header>
 
 <!-- HERO -->
-<section class="hero">
-  <div class="hero-bg"><img src="assets/hero-flag.jpg" alt="Antique 13-star American flag"></div>
+<section class="hero" id="hero">
+  <div class="hero-bg" id="heroBg"><img src="assets/hero-flag.jpg" alt="Antique 13-star American flag"></div>
+  <canvas id="embers" aria-hidden="true"></canvas>
   <div class="hero-content">
     <div class="hero-eyebrow">1776 &nbsp;·&nbsp; The People's Tour &nbsp;·&nbsp; 2026</div>
-    <h1>America's 250th.<br><em>One tour. All fifty states.</em></h1>
+    <h1><span class="line-mask"><span>America's 250th.</span></span><span class="line-mask"><span><em>One tour. All fifty states.</em></span></span></h1>
     <p class="hero-sub">A monumental, coast-to-coast celebration of two and a half centuries of American ingenuity, faith, and freedom — brought to life through music, storytelling, and the immersive Freedom Village. Free to every family in America.</p>
     <div class="hero-ctas">
       <a href="#dates" class="btn btn-gold">View Tour Dates <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
@@ -670,44 +784,44 @@ footer{background:#060B18;border-top:1px solid rgba(201,162,75,.18);padding:clam
       <p class="lead reveal reveal-d1" style="max-width:380px">Four signature experiences travel with every stop — each one free, family-first, and built to bring history to life.</p>
     </div>
     <div class="exp-grid">
-      <article class="exp-card reveal">
+      <article class="exp-card reveal" data-modal="village">
         <div class="gold-line"></div>
         <img src="assets/village.jpg" alt="Freedom Village">
         <div class="exp-body">
           <span class="exp-num">No. 01</span>
           <h3>Freedom Village</h3>
           <p>A vibrant pop-up village of colonial crafts, blacksmiths, reenactors, artisan workshops, and live patriotic performances — hands-on history for every generation.</p>
-          <span class="exp-link">Explore →</span>
+          <span class="exp-link" data-modal="village">Explore →</span>
         </div>
       </article>
-      <article class="exp-card reveal reveal-d1">
+      <article class="exp-card reveal reveal-d1" data-modal="kids">
         <div class="gold-line"></div>
         <img src="assets/kids.jpg" alt="Liberty Kids America">
         <div class="exp-body">
           <span class="exp-num">No. 02</span>
           <h3>Liberty Kids America</h3>
           <p>Face painting, costumed characters from every era of history, and joyful teaching of the traditions on which our country was founded.</p>
-          <span class="exp-link">Explore →</span>
+          <span class="exp-link" data-modal="kids">Explore →</span>
         </div>
       </article>
-      <article class="exp-card reveal reveal-d2">
+      <article class="exp-card reveal reveal-d2" data-modal="show">
         <div class="gold-line"></div>
         <img src="assets/show.jpg" alt="The Freedom 250 Show">
         <div class="exp-body">
           <span class="exp-num">No. 03</span>
           <h3>The Freedom Show</h3>
           <p>A powerful, high-energy concert of faith, freedom, sacrifice, and unity — striking visuals and anthems that reignite national pride.</p>
-          <span class="exp-link">Explore →</span>
+          <span class="exp-link" data-modal="show">Explore →</span>
         </div>
       </article>
-      <article class="exp-card reveal reveal-d3">
+      <article class="exp-card reveal reveal-d3" data-modal="trips">
         <div class="gold-line"></div>
         <img src="assets/trips.jpg" alt="Liberty Trips">
         <div class="exp-body">
           <span class="exp-num">No. 04</span>
           <h3>Liberty Trips</h3>
           <p>1,000 stops. One road. One nation. The Liberty Trip bus visits America's cultural treasures — with an interactive map for your own family adventure.</p>
-          <span class="exp-link">View the Map →</span>
+          <span class="exp-link" data-modal="trips">View the Map →</span>
         </div>
       </article>
     </div>
@@ -745,7 +859,7 @@ footer{background:#060B18;border-top:1px solid rgba(201,162,75,.18);padding:clam
         <p>The year was 1947. The world was still recovering from the ravages of World War II, and Europe was hit especially hard. American journalist <b>Drew Pearson</b>, touring post-war Europe, watched a few carloads of grain win hearts — and knew America could do better.</p>
         <p>What followed became one of the great untold stories of American generosity — a train that grew as it crossed the nation, carrying the goodwill of ordinary people. Its message was laid in granite on a little-known monument in Kailua, Hawai'i, so we would remember <b>the miracle of America</b>.</p>
         <div class="hero-ctas" style="justify-content:flex-start;margin-top:36px">
-          <a href="#" class="btn btn-ghost">Read the Full Story <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a href="#" class="btn btn-ghost" data-modal="train">Read the Full Story <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         </div>
       </div>
     </div>
@@ -808,15 +922,18 @@ footer{background:#060B18;border-top:1px solid rgba(201,162,75,.18);padding:clam
       </div>
       <div class="dates-side reveal reveal-d1">
         <p>Fifty star-studded events are rolling out across the nation — 26 flagship locations chosen for their historical significance and cultural influence. Dates and locations are added as they're confirmed.</p>
-        <div class="state-chips">
-          <span class="chip live">Ohio — Jul 24</span>
-          <span class="chip">California</span><span class="chip">Texas</span><span class="chip">Nevada</span>
-          <span class="chip">Pennsylvania</span><span class="chip">Virginia</span><span class="chip">Tennessee</span>
-          <span class="chip">Florida</span><span class="chip">Missouri</span><span class="chip">Alabama</span>
-          <span class="chip">+ 40 more states</span>
-        </div>
         <p class="dates-note">Dates and locations are subject to change. Sign up below and we'll tell you the moment your state is announced.</p>
       </div>
+    </div>
+    <div class="map-shell reveal" id="mapShell">
+      <div id="mapMount" aria-label="Interactive map of tour states"></div>
+      <div class="map-tip" id="mapTip"><b>State</b><span>Coming soon</span></div>
+      <div class="map-legend">
+        <div class="leg"><i class="l-next"></i>Next Stop</div>
+        <div class="leg"><i class="l-visited"></i>Celebrated</div>
+        <div class="leg"><i class="l-soon"></i>Coming Soon</div>
+      </div>
+      <p class="map-hint">Tap your state to sign up for its announcement.</p>
     </div>
   </div>
 </section>
@@ -852,17 +969,17 @@ footer{background:#060B18;border-top:1px solid rgba(201,162,75,.18);padding:clam
       <p class="lead reveal reveal-d1" style="max-width:360px">For interviews and media requests: <a href="mailto:Media@us250tour.com" style="color:var(--gold-bright)">Media@us250tour.com</a></p>
     </div>
     <div class="news-grid">
-      <article class="news-card reveal">
+      <article class="news-card reveal" data-href="https://us250tour.com/easton-corbin-us250-tour/">
         <div class="news-date">March 18, 2026</div>
         <h3>Country music star Easton Corbin headlines US250 Tour concert in Childersburg, AL</h3>
         <span class="news-more">Read More <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
       </article>
-      <article class="news-card reveal reveal-d1">
+      <article class="news-card reveal reveal-d1" data-href="https://us250tour.com/president-trump-launches-freedom-250/">
         <div class="news-date">December 18, 2025</div>
         <h3>President Trump launches Freedom 250 — US250 Tour named a founding member of the network</h3>
         <span class="news-more">Read More <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
       </article>
-      <article class="news-card reveal reveal-d2">
+      <article class="news-card reveal reveal-d2" data-href="https://us250tour.com/us-250-tour-kicks-off-nationwide-celebration-mesquite-nevada/">
         <div class="news-date">December 8, 2025</div>
         <h3>U.S. 250 Tour kicks off nationwide celebration in Mesquite, Nevada</h3>
         <span class="news-more">Read More <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
@@ -882,7 +999,7 @@ footer{background:#060B18;border-top:1px solid rgba(201,162,75,.18);padding:clam
       <div class="spark-price">$2.50</div>
       <h3>Create a Spark of Light</h3>
       <p>For just two dollars and fifty cents — a cent for every year of American freedom — you can help bring this celebration to all fifty states, entirely free to every family.</p>
-      <a href="#" class="btn btn-gold">Create Your Spark <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a href="https://secure.anedot.com/moms/us250-spark-of-light" target="_blank" rel="noopener" class="btn btn-gold">Create Your Spark <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
     </div>
     <div class="tiers">
       <div class="tier reveal"><span class="gold-star">★</span><h4>Booth Space</h4><p>Bring your business or organization into the Freedom Village at any tour stop.</p></div>
@@ -943,6 +1060,13 @@ footer{background:#060B18;border-top:1px solid rgba(201,162,75,.18);padding:clam
           <span class="brand-text"><b>U.S. 250 TOUR</b><span>The People's Tour</span></span>
         </a>
         <p>A non-profit initiative in collaboration with Moms for America, celebrating 250 years of American freedom, faith, and family.</p>
+        <div class="socials">
+          <a href="https://www.facebook.com/people/US-250-Tour/61576663139816/" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M13.5 21v-8h2.7l.4-3.2h-3.1V7.7c0-.9.3-1.6 1.6-1.6h1.7V3.2c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.4H7.4V13h2.7v8h3.4z"/></svg></a>
+          <a href="https://www.instagram.com/us250tour" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 4.3c2.5 0 2.8 0 3.8.1 2.5.1 3.7 1.3 3.8 3.8 0 1 .1 1.3.1 3.8s0 2.8-.1 3.8c-.1 2.5-1.3 3.7-3.8 3.8-1 0-1.3.1-3.8.1s-2.8 0-3.8-.1c-2.5-.1-3.7-1.3-3.8-3.8 0-1-.1-1.3-.1-3.8s0-2.8.1-3.8C4.5 5.7 5.7 4.5 8.2 4.4c1-.1 1.3-.1 3.8-.1zM12 2.5c-2.6 0-2.9 0-3.9.1-3.4.2-5.3 2-5.5 5.5-.1 1-.1 1.3-.1 3.9s0 2.9.1 3.9c.2 3.4 2 5.3 5.5 5.5 1 .1 1.3.1 3.9.1s2.9 0 3.9-.1c3.4-.2 5.3-2 5.5-5.5.1-1 .1-1.3.1-3.9s0-2.9-.1-3.9c-.2-3.4-2-5.3-5.5-5.5-1-.1-1.3-.1-3.9-.1zm0 4.6a4.9 4.9 0 1 0 0 9.8 4.9 4.9 0 0 0 0-9.8zm0 8.1a3.2 3.2 0 1 1 0-6.4 3.2 3.2 0 0 1 0 6.4zm5.1-8.3a1.1 1.1 0 1 0 0-2.3 1.1 1.1 0 0 0 0 2.3z"/></svg></a>
+          <a href="https://www.youtube.com/@US250TourOfficial/" target="_blank" rel="noopener" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M21.6 7.2a2.5 2.5 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4A2.5 2.5 0 0 0 2.4 7.2 26 26 0 0 0 2 12a26 26 0 0 0 .4 4.8 2.5 2.5 0 0 0 1.8 1.8c1.6.4 7.8.4 7.8.4s6.2 0 7.8-.4a2.5 2.5 0 0 0 1.8-1.8A26 26 0 0 0 22 12a26 26 0 0 0-.4-4.8zM10 15.2V8.8l5.2 3.2-5.2 3.2z"/></svg></a>
+          <a href="https://www.tiktok.com/@us250tour/" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24"><path d="M16.6 3c.4 2.2 1.8 3.6 4 3.8v3c-1.5 0-2.9-.5-4-1.3v6.3c0 4-2.8 6.2-5.9 6.2A5.6 5.6 0 0 1 5 15.4c0-3.3 2.8-5.8 6.3-5.5v3.1c-1.6-.3-3.1.7-3.1 2.3 0 1.5 1.1 2.6 2.6 2.6 1.6 0 2.8-1.2 2.8-3.1V3h3z"/></svg></a>
+          <a href="https://x.com/US250Tour" target="_blank" rel="noopener" aria-label="X"><svg viewBox="0 0 24 24"><path d="M17.8 3h3l-6.6 7.6L22 21h-6.1l-4.8-6.3L5.6 21h-3l7.1-8.1L2 3h6.3l4.3 5.7L17.8 3zm-1.1 16.2h1.7L7.4 4.7H5.6l11.1 14.5z"/></svg></a>
+        </div>
       </div>
       <div class="foot-col">
         <h5>The Tour</h5>
@@ -971,12 +1095,49 @@ footer{background:#060B18;border-top:1px solid rgba(201,162,75,.18);padding:clam
     </div>
     <div class="foot-bottom">
       <p>© 2026 The U.S. 250 Freedom Tour. A non-profit initiative with Moms for America.</p>
-      <nav><a href="#">Privacy Policy</a><a href="#">Terms</a><a href="#">US250 Channel</a></nav>
+      <nav><a href="https://us250tour.com/privacy-policy/" target="_blank" rel="noopener">Privacy Policy</a><a href="https://mygfmstore.com/" target="_blank" rel="noopener">Merch Store</a><a href="https://glu.love/channel/us-250-tour/" target="_blank" rel="noopener">US250 Channel</a></nav>
     </div>
   </div>
 </footer>
 
+<!-- MODALS -->
+<div class="modal-veil" id="modalVeil" role="dialog" aria-modal="true">
+  <div class="modal" id="modalBox">
+    <button class="modal-close" id="modalClose" aria-label="Close">✕</button>
+    <div class="modal-hero"><img id="modalImg" src="" alt=""></div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<button id="toTop" aria-label="Back to top"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V5M5 11l7-7 7 7"/></svg></button>
+
 <script>
+// ---------- Modal content ----------
+const MODALS={
+  village:{img:'assets/village.jpg',eyebrow:'No. 01 · The Experience',title:'Freedom <em>Village</em>',
+    html:`<p>At every tour stop, guests step into the Freedom Village — a vibrant pop-up village full of colonial crafts, reenactors, artisan workshops, family activities, and live patriotic performances. It's a hands-on celebration of liberty, heritage, and history made to engage every generation. Open to all, and always free.</p>
+    <ul><li>Hands-on history booths with historical tools, costumes &amp; games</li><li>Real-life demonstrations from blacksmiths, weavers &amp; historical figures</li><li>Interactive workshops with artisans and reenactors</li><li>Photo ops with costumed Founders</li><li>Live music, patriotic performances &amp; stage speakers</li><li>A bustling Market Square with local vendors &amp; themed merchandise</li></ul>
+    <div class="modal-cta"><a class="btn btn-gold" href="#signup" data-close>Find It Near You <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>`},
+  kids:{img:'assets/kids.jpg',eyebrow:'No. 02 · The Experience',title:'Liberty Kids <em>America</em>',
+    html:`<p>Liberty Kids America is a special place found within the Freedom Village at each show. Face painting, a cast full of characters dressed for the moment in history they represent — teaching your kids the true history of America and the traditions on which our country was founded.</p>
+    <ul><li>Costumed characters from every era of American history</li><li>Face painting &amp; family craft zones</li><li>Story time with the Founders</li><li>History games built for young patriots</li></ul>
+    <div class="modal-cta"><a class="btn btn-gold" href="#signup" data-close>Bring the Kids <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>`},
+  show:{img:'assets/show.jpg',eyebrow:'No. 03 · The Experience',title:'The Freedom 250 <em>Show</em>',
+    html:`<p>Each U.S. 250 show is a powerful, high-energy concert designed to unite and inspire through music. Bold, heartfelt songs centered on faith, freedom, sacrifice, and unity deliver a message of hope that resonates across generations.</p>
+    <p>Griffith and The Hoppers join forces as a six-person vocal ensemble backed by a full live band — performing anthems like <i>We Are America</i>, <i>I Pledge My Allegiance</i>, and <i>The Star-Spangled Banner</i>. Paired with striking visuals, each concert becomes a rallying point: a reminder that the American spirit still burns bright, bold, and unbreakable.</p>
+    <div class="modal-cta"><a class="btn btn-gold" href="https://glu.love/channel/us-250-tour/" target="_blank" rel="noopener">Watch the US250 Channel <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>`},
+  trips:{img:'assets/trips.jpg',eyebrow:'No. 04 · The Experience',title:'Liberty <em>Trips</em>',
+    html:`<p>1,000 stops. One road. One nation. While the major events roll on, the Liberty Trip bus travels the country visiting cultural treasures, national parks, and the stories of the people and places that made America.</p>
+    <ul><li>Interactive map with 1,000+ locations in your own state</li><li>Road-trip style vlog episodes</li><li>Liberty Pup social accounts (@LibertyPupOfficial)</li><li>Family travel inspiration &amp; history education</li></ul>
+    <div class="modal-cta"><a class="btn btn-gold" href="https://momsforamerica250.com/liberty-trips-map" target="_blank" rel="noopener">Open the Liberty Trips Map <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>`},
+  train:{img:'assets/train.jpg',eyebrow:'1947 · The Inspiration',title:'The Friendship <em>Train</em>',
+    html:`<p>The year was 1947. The people of the world were still recovering from the ravages of World War II — and Europe was hit especially hard. Drew Pearson, a popular American journalist touring post-war Europe, noticed the Communists being lauded for delivering a few carloads of grain, and it deeply troubled him. He knew America could do better.</p>
+    <p>So a train set out from Los Angeles. As it crossed the nation, ordinary Americans — farmers, schoolchildren, churches, whole towns — loaded it with food, until 700 boxcars of goodwill sailed for France and Italy, given freely, asking nothing in return. Two years later France answered with the Merci Train: 49 boxcars filled with gifts of gratitude, one for every state.</p>
+    <p>The message was laid in granite on a little-known monument in Kailua, Hawai'i, so we would remember the miracle of America. It is the inspiration for everything this tour stands for.</p>
+    <div class="modal-cta"><a class="btn btn-gold" href="https://us250tour.com/wp-content/uploads/2025/11/FRIENDSHIP-TRAIN-STORY.pdf" target="_blank" rel="noopener">Read the Incredible Story <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    <a class="btn btn-ghost" href="https://us250tour.com/wp-content/uploads/2025/11/Merci-Train-Locations-and-History.pdf" target="_blank" rel="noopener">Find a Train Near You</a></div>`}
+};
+
 // ---------- Preloader ----------
 window.addEventListener('load',()=>{setTimeout(()=>document.getElementById('loader').classList.add('done'),650)});
 setTimeout(()=>document.getElementById('loader').classList.add('done'),3200); // failsafe
@@ -1029,6 +1190,143 @@ const cio=new IntersectionObserver(es=>es.forEach(e=>{
   cio.unobserve(el);
 }),{threshold:.6});
 document.querySelectorAll('[data-count]').forEach(el=>cio.observe(el));
+
+// ---------- Hero load reveal ----------
+window.addEventListener('load',()=>setTimeout(()=>document.getElementById('hero').classList.add('loaded'),750));
+setTimeout(()=>document.getElementById('hero').classList.add('loaded'),3400);
+
+// ---------- Scroll progress + back-to-top ----------
+const prog=document.getElementById('progress'),toTop=document.getElementById('toTop');
+addEventListener('scroll',()=>{
+  const h=document.documentElement,max=h.scrollHeight-h.clientHeight;
+  prog.style.width=(max?scrollY/max*100:0)+'%';
+  toTop.classList.toggle('show',scrollY>900);
+},{passive:true});
+toTop.addEventListener('click',()=>scrollTo({top:0,behavior:'smooth'}));
+
+// ---------- Custom cursor ----------
+if(matchMedia('(hover:hover) and (pointer:fine)').matches){
+  document.body.classList.add('has-cursor');
+  const dot=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
+  let mx=0,my=0,rx=0,ry=0;
+  addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dot.style.transform=`translate(${mx}px,${my}px) translate(-50%,-50%)`});
+  (function loop(){rx+=(mx-rx)*.16;ry+=(my-ry)*.16;ring.style.transform=`translate(${rx}px,${ry}px) translate(-50%,-50%)`;requestAnimationFrame(loop)})();
+  document.querySelectorAll('a,button,select,input,.exp-card,.usmap path,.news-card').forEach(el=>{
+    el.addEventListener('mouseenter',()=>ring.classList.add('hovering'));
+    el.addEventListener('mouseleave',()=>ring.classList.remove('hovering'));
+  });
+  document.addEventListener('mouseover',e=>{if(e.target.closest('a,button,select,input,.exp-card,path,.news-card'))ring.classList.add('hovering');else ring.classList.remove('hovering')});
+}else{
+  document.getElementById('cursor').remove();document.getElementById('cursorRing').remove();
+}
+
+// ---------- Hero embers (gold particles) ----------
+(function(){
+  const c=document.getElementById('embers'),x=c.getContext('2d');
+  let W,H,P=[];
+  function size(){W=c.width=c.offsetWidth;H=c.height=c.offsetHeight}
+  size();addEventListener('resize',size);
+  const N=Math.min(70,innerWidth/18);
+  for(let i=0;i<N;i++)P.push({x:Math.random(),y:Math.random(),r:Math.random()*1.8+.4,s:Math.random()*.25+.06,o:Math.random()*.5+.15,w:Math.random()*6.28});
+  (function draw(){
+    x.clearRect(0,0,W,H);
+    for(const p of P){
+      p.y-=p.s/H*60;p.w+=.012;
+      if(p.y<-.02){p.y=1.02;p.x=Math.random()}
+      const px=p.x*W+Math.sin(p.w)*22,py=p.y*H;
+      const g=x.createRadialGradient(px,py,0,px,py,p.r*4);
+      g.addColorStop(0,`rgba(232,206,140,${p.o})`);g.addColorStop(1,'rgba(232,206,140,0)');
+      x.fillStyle=g;x.beginPath();x.arc(px,py,p.r*4,0,6.28);x.fill();
+    }
+    requestAnimationFrame(draw);
+  })();
+})();
+
+// ---------- Hero mouse parallax ----------
+const heroBg=document.getElementById('heroBg');
+if(matchMedia('(hover:hover)').matches){
+  document.getElementById('hero').addEventListener('mousemove',e=>{
+    const dx=(e.clientX/innerWidth-.5),dy=(e.clientY/innerHeight-.5);
+    heroBg.style.transform=`translate(${dx*-18}px,${dy*-12}px) scale(1.04)`;
+  });
+}
+
+// ---------- Magnetic buttons ----------
+if(matchMedia('(hover:hover) and (pointer:fine)').matches){
+  document.querySelectorAll('.btn,.btn-donate').forEach(b=>{
+    b.addEventListener('mousemove',e=>{
+      const r=b.getBoundingClientRect();
+      b.style.transform=`translate(${(e.clientX-r.left-r.width/2)*.18}px,${(e.clientY-r.top-r.height/2)*.28}px)`;
+    });
+    b.addEventListener('mouseleave',()=>b.style.transform='');
+  });
+}
+
+// ---------- 3D tilt cards ----------
+if(matchMedia('(hover:hover) and (pointer:fine)').matches){
+  document.querySelectorAll('.exp-card,.artist-card').forEach(card=>{
+    card.addEventListener('mousemove',e=>{
+      const r=card.getBoundingClientRect();
+      const rx=((e.clientY-r.top)/r.height-.5)*-7,ry=((e.clientX-r.left)/r.width-.5)*7;
+      card.style.transform=`perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-4px)`;
+    });
+    card.addEventListener('mouseleave',()=>card.style.transform='');
+  });
+}
+
+// ---------- Modal system ----------
+const veil=document.getElementById('modalVeil'),mImg=document.getElementById('modalImg'),mBody=document.getElementById('modalBody');
+function openModal(key){
+  const m=MODALS[key];if(!m)return;
+  mImg.src=m.img;
+  mBody.innerHTML=`<div class="eyebrow">${m.eyebrow}</div><h3>${m.title}</h3>${m.html}`;
+  veil.classList.add('open');document.body.classList.add('modal-open');
+  mBody.querySelectorAll('[data-close]').forEach(a=>a.addEventListener('click',closeModal));
+}
+function closeModal(){veil.classList.remove('open');document.body.classList.remove('modal-open')}
+document.querySelectorAll('[data-modal]').forEach(el=>el.addEventListener('click',e=>{
+  if(e.target.closest('a[href^="http"]'))return;
+  e.preventDefault();openModal(el.dataset.modal);
+}));
+document.getElementById('modalClose').addEventListener('click',closeModal);
+veil.addEventListener('click',e=>{if(e.target===veil)closeModal()});
+addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+
+// ---------- News cards clickable ----------
+document.querySelectorAll('.news-card[data-href]').forEach(card=>{
+  card.style.cursor='pointer';
+  card.addEventListener('click',()=>open(card.dataset.href,'_blank','noopener'));
+});
+
+// ---------- Interactive US map ----------
+const TOUR_STATES={
+  oh:{status:'Next Stop · July 24–25',cls:'next'},
+  nv:{status:'Celebrated · Mesquite Kickoff',cls:'visited'},
+  al:{status:'Celebrated · Easton Corbin Concert',cls:'visited'}
+};
+fetch('assets/us-map.svg').then(r=>r.text()).then(svg=>{
+  const mount=document.getElementById('mapMount');
+  mount.innerHTML=svg;
+  const map=mount.querySelector('svg');map.classList.add('usmap');map.removeAttribute('width');map.removeAttribute('height');
+  const tip=document.getElementById('mapTip'),shell=document.getElementById('mapShell');
+  map.querySelectorAll('path').forEach(p=>{
+    const info=TOUR_STATES[p.id];
+    if(info)p.classList.add(info.cls);
+    p.addEventListener('mousemove',e=>{
+      const sr=shell.getBoundingClientRect();
+      tip.style.left=(e.clientX-sr.left)+'px';tip.style.top=(e.clientY-sr.top)+'px';
+      tip.querySelector('b').textContent=p.dataset.name||p.id.toUpperCase();
+      tip.querySelector('span').textContent=info?info.status:'Coming Soon · Sign up for the date';
+      tip.classList.add('show');
+    });
+    p.addEventListener('mouseleave',()=>tip.classList.remove('show'));
+    p.addEventListener('click',()=>{
+      const sel=document.getElementById('st');
+      if(sel){[...sel.options].forEach(o=>{if(o.text===(p.dataset.name||''))sel.value=o.text});}
+      document.getElementById('signup').scrollIntoView({behavior:'smooth'});
+    });
+  });
+}).catch(()=>{});
 
 // ---------- Signup form ----------
 document.getElementById('signupForm').addEventListener('submit',function(e){
