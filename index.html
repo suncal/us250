@@ -137,7 +137,7 @@ header.scrolled .nav{padding:14px clamp(20px,4vw,48px)}
   animation:kenburns 26s var(--ease) infinite alternate;
   filter:brightness(.72) saturate(1.05);
 }
-@keyframes kenburns{from{transform:scale(1)}to{transform:scale(1.12)}}
+@keyframes kenburns{from{transform:scale(1.02)}to{transform:scale(1.08)}}
 .hero-bg::after{
   content:'';position:absolute;inset:0;
   background:
@@ -888,7 +888,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{ou
 
 <!-- HALL OF GIANTS -->
 <section class="giants">
-  <div class="giants-bg"><img src="assets/giants.jpg" alt="Hall of Giants hologram exhibit" width="1376" height="768" loading="lazy" decoding="async"></div>
+  <div class="giants-bg"><img src="assets/giants.jpg" alt="Hall of Giants hologram exhibit" width="2560" height="1433" loading="lazy" decoding="async"></div>
   <div class="wrap">
     <div class="giants-content">
       <div class="eyebrow reveal">An Interactive Experience</div>
@@ -908,7 +908,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{ou
   <div class="wrap">
     <div class="train-grid">
       <div class="train-img reveal">
-        <img src="assets/train.jpg" alt="The 1947 Friendship Train" width="1376" height="768" loading="lazy" decoding="async">
+        <img src="assets/train.jpg" alt="The 1947 Friendship Train" width="2560" height="1433" loading="lazy" decoding="async">
         <div class="train-year">1947</div>
       </div>
       <div class="train-copy reveal reveal-d1">
@@ -1350,7 +1350,7 @@ const heroBg=document.getElementById('heroBg');
 if(!REDUCED&&matchMedia('(hover:hover)').matches){
   document.getElementById('hero').addEventListener('mousemove',e=>{
     const dx=(e.clientX/innerWidth-.5),dy=(e.clientY/innerHeight-.5);
-    heroBg.style.transform=`translate(${dx*-18}px,${dy*-12}px) scale(1.04)`;
+    heroBg.style.transform=`translate(${dx*-14}px,${dy*-9}px) scale(1.02)`;
   });
 }
 
