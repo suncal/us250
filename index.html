@@ -688,6 +688,49 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{ou
   .hero-bg img{animation:none}
 }
 
+/* ============ PARTNERS ============ */
+.partners{background:var(--ink);border-top:1px solid rgba(201,162,75,.12)}
+.partner-row{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:clamp(44px,5vw,64px)}
+.partner{
+  border:1px solid rgba(201,162,75,.18);border-radius:4px;padding:34px 26px;text-align:center;
+  transition:all .45s var(--ease);background:rgba(244,238,223,.015);display:flex;flex-direction:column;align-items:center;gap:12px;
+}
+.partner:hover{border-color:rgba(201,162,75,.5);transform:translateY(-4px);background:rgba(201,162,75,.05)}
+.partner .p-ic{width:46px;height:46px;border-radius:50%;border:1px solid var(--gold-dim);display:flex;align-items:center;justify-content:center;color:var(--gold-bright);font-size:17px}
+.partner b{font-family:var(--serif);font-weight:500;font-size:18px;color:var(--cream);line-height:1.3}
+.partner span{font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);line-height:1.6}
+.founding{
+  margin-top:clamp(44px,5vw,60px);text-align:center;border:1px solid rgba(201,162,75,.3);border-radius:100px;
+  display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;
+  padding:18px 34px;width:fit-content;margin-left:auto;margin-right:auto;
+  background:linear-gradient(90deg,rgba(201,162,75,.09),rgba(201,162,75,.02));
+}
+.founding .f-star{color:var(--gold-bright)}
+.founding p{font-size:13.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-dim)}
+.founding p b{color:var(--gold-bright);font-weight:700}
+/* ============ WATCH + WEAR BAND ============ */
+.band{background:var(--ink-2)}
+.band-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.band-card{
+  position:relative;border-radius:6px;overflow:hidden;padding:clamp(40px,5vw,64px);
+  border:1px solid rgba(201,162,75,.22);min-height:280px;display:flex;flex-direction:column;justify-content:flex-end;
+  transition:all .5s var(--ease);
+}
+.band-card:hover{border-color:rgba(201,162,75,.55);transform:translateY(-5px);box-shadow:0 30px 70px rgba(0,0,0,.45)}
+.band-card::before{content:'';position:absolute;inset:0;background:linear-gradient(160deg,rgba(201,162,75,.12),transparent 55%)}
+.band-card .b-eyebrow{font-size:11px;font-weight:700;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);margin-bottom:14px;position:relative}
+.band-card h3{font-family:var(--serif);font-weight:500;font-size:clamp(26px,2.8vw,38px);color:var(--cream);line-height:1.15;position:relative}
+.band-card h3 em{font-style:italic;color:var(--gold-bright)}
+.band-card p{margin:14px 0 26px;font-size:15px;line-height:1.75;color:var(--text-dim);max-width:420px;position:relative}
+.band-card .btn{align-self:flex-start;position:relative}
+.band-card .b-mark{position:absolute;top:-38px;right:-16px;font-size:180px;line-height:1;color:rgba(201,162,75,.06);font-family:var(--serif);pointer-events:none}
+/* team CTA card */
+.member.join{display:flex;flex-direction:column;justify-content:center;align-items:flex-start;border-style:dashed;border-color:rgba(201,162,75,.35)}
+.member.join:hover{border-style:solid}
+@media(max-width:1080px){.partner-row{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:920px){.band-grid{grid-template-columns:1fr}}
+@media(max-width:600px){.partner-row{grid-template-columns:1fr}}
+
 /* ============ RESPONSIVE ============ */
 @media(max-width:1080px){
   .exp-grid{grid-template-columns:repeat(2,1fr)}
@@ -756,6 +799,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{ou
       <li><a href="#story">Our Story</a></li>
       <li><a href="#dates">Event Dates</a></li>
       <li><a href="#team">Team</a></li>
+      <li><a href="#partners">Partners</a></li>
       <li><a href="#news">Newsroom</a></li>
       <li><a href="#signup">Sign Up</a></li>
     </ul>
@@ -1012,6 +1056,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{ou
       <div class="member reveal reveal-d1"><div class="member-mono">ZF</div><h4>Zachary Fletcher</h4><span>Director of Strategic Marketing</span></div>
       <div class="member reveal reveal-d2"><div class="member-mono">AB</div><h4>Alonzo Buchanan Jr.</h4><span>Director of Multicultural Relations</span></div>
       <div class="member reveal reveal-d3"><div class="member-mono">BJ</div><h4>Bob Jimenez</h4><span>Director of Community &amp; Culture · 5× Emmy Recipient</span></div>
+      <div class="member reveal"><div class="member-mono">RP</div><h4>Russell Parker</h4><span>Executive Director of Sponsorships &amp; Advertising</span></div>
+      <a class="member join reveal reveal-d1" href="#signup" data-interest="Volunteering"><div class="member-mono">&#9733;</div><h4>Join the Tour</h4><span>Volunteer, host, or partner &mdash; the tour needs you</span></a>
     </div>
   </div>
 </section>
@@ -1046,6 +1092,28 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{ou
   </div>
 </section>
 
+<!-- WATCH + WEAR -->
+<section class="band sec-pad" style="padding-top:0">
+  <div class="wrap">
+    <div class="band-grid">
+      <div class="band-card reveal">
+        <span class="b-mark">&#9654;</span>
+        <div class="b-eyebrow">The US250 Channel</div>
+        <h3>Can't make it? <em>Watch every stop.</em></h3>
+        <p>Livestreams, featured interviews, outtakes, and backstage promos from all fifty states &mdash; free on the US250 Channel.</p>
+        <a class="btn btn-gold" href="https://glu.love/channel/us-250-tour/" target="_blank" rel="noopener">Watch the Channel <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div>
+      <div class="band-card reveal reveal-d1">
+        <span class="b-mark">&#9733;</span>
+        <div class="b-eyebrow">Official Merchandise</div>
+        <h3>Wear the story. <em>Fund the mission.</em></h3>
+        <p>Every tee, hat, and keepsake from the official store helps keep the tour free for every family in America.</p>
+        <a class="btn btn-ghost" href="https://mygfmstore.com/" target="_blank" rel="noopener">Shop the Collection <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- SUPPORT -->
 <section class="support sec-pad" id="support">
   <div class="wrap">
@@ -1060,10 +1128,35 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{ou
       <a href="https://secure.anedot.com/moms/us250-spark-of-light" target="_blank" rel="noopener" class="btn btn-gold">Create Your Spark <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
     </div>
     <div class="tiers">
-      <div class="tier reveal"><span class="gold-star">★</span><h4>Booth Space</h4><p>Bring your business or organization into the Freedom Village at any tour stop.</p></div>
-      <div class="tier reveal reveal-d1"><span class="gold-star">★ ★</span><h4>Zone Sponsor</h4><p>Put your name on a signature zone — Kids America, the Main Stage, or the Village Square.</p></div>
-      <div class="tier reveal reveal-d2"><span class="gold-star">★ ★ ★</span><h4>General Sponsor</h4><p>Support a full event day in your state with prominent recognition across the grounds.</p></div>
+      <a class="tier reveal" href="#signup" data-interest="Sponsoring" style="display:block"><span class="gold-star">★</span><h4>Booth Space</h4><p>Bring your business or organization into the Freedom Village at any tour stop.</p></a>
+      <a class="tier reveal reveal-d1" href="#signup" data-interest="Sponsoring" style="display:block"><span class="gold-star">★ ★</span><h4>Zone Sponsor</h4><p>Put your name on a signature zone — Kids America, the Main Stage, or the Village Square.</p></a>
+      <a class="tier reveal reveal-d2" href="#signup" data-interest="Sponsoring" style="display:block"><span class="gold-star">★ ★ ★</span><h4>General Sponsor</h4><p>Support a full event day in your state with prominent recognition across the grounds.</p></a>
       <div class="tier reveal reveal-d3"><span class="gold-star">★ ★ ★ ★</span><h4>National Sponsor</h4><p>Travel with the tour to all 50 states as a nationwide partner in America's 250th.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PARTNERS -->
+<section class="partners sec-pad" id="partners">
+  <div class="wrap">
+    <div style="text-align:center;max-width:760px;margin:0 auto">
+      <div class="eyebrow reveal" style="justify-content:center">Friends of 250</div>
+      <h2 class="h2 reveal reveal-d1">Carried by <em>partners.</em> Powered by the people.</h2>
+      <p class="lead reveal reveal-d2" style="margin:22px auto 0">From local businesses to national brands and private donors &mdash; the Friends of 250 share one belief: America's 250th birthday deserves to be celebrated in a meaningful, inspiring way.</p>
+    </div>
+    <div class="partner-row">
+      <div class="partner reveal"><span class="p-ic">&#9829;</span><b>Moms for America</b><span>Founding Collaborator</span></div>
+      <div class="partner reveal reveal-d1"><span class="p-ic">&#9834;</span><b>GFM Productions</b><span>Live Production Partner</span></div>
+      <div class="partner reveal reveal-d2"><span class="p-ic">&#9670;</span><b>Hall of Giants</b><span>Experience Partner</span></div>
+      <div class="partner reveal reveal-d3"><span class="p-ic">&#9654;</span><b>GLU Channel</b><span>Broadcast Partner</span></div>
+    </div>
+    <div class="founding reveal">
+      <span class="f-star">&#9733;</span>
+      <p><b>Founding Member</b> of the Freedom 250 Network</p>
+      <span class="f-star">&#9733;</span>
+    </div>
+    <div style="text-align:center;margin-top:44px" class="reveal">
+      <a class="btn btn-gold" href="#signup" data-interest="Partnering">Become a Friend of 250 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
     </div>
   </div>
 </section>
@@ -1136,8 +1229,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{ou
               <option>Alabama</option><option>Alaska</option><option>Arizona</option><option>Arkansas</option><option>California</option><option>Colorado</option><option>Connecticut</option><option>Delaware</option><option>Florida</option><option>Georgia</option><option>Hawaii</option><option>Idaho</option><option>Illinois</option><option>Indiana</option><option>Iowa</option><option>Kansas</option><option>Kentucky</option><option>Louisiana</option><option>Maine</option><option>Maryland</option><option>Massachusetts</option><option>Michigan</option><option>Minnesota</option><option>Mississippi</option><option>Missouri</option><option>Montana</option><option>Nebraska</option><option>Nevada</option><option>New Hampshire</option><option>New Jersey</option><option>New Mexico</option><option>New York</option><option>North Carolina</option><option>North Dakota</option><option>Ohio</option><option>Oklahoma</option><option>Oregon</option><option>Pennsylvania</option><option>Rhode Island</option><option>South Carolina</option><option>South Dakota</option><option>Tennessee</option><option>Texas</option><option>Utah</option><option>Vermont</option><option>Virginia</option><option>Washington</option><option>West Virginia</option><option>Wisconsin</option><option>Wyoming</option>
             </select>
           </div>
-          <div class="field"><label for="in">I'm interested in</label>
-            <select id="in">
+          <div class="field"><label for="interest">I'm interested in</label>
+            <select id="interest">
               <option>Attending</option><option>Sponsoring</option><option>Hosting</option><option>Partnering</option><option>Volunteering</option>
             </select>
           </div>
@@ -1184,7 +1277,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{ou
           <li><a href="#support">Donate</a></li>
           <li><a href="#support">Sponsorships</a></li>
           <li><a href="#signup">Volunteer</a></li>
-          <li><a href="#news">Newsroom</a></li>
+          <li><a href="#partners">Partners</a></li>
+      <li><a href="#news">Newsroom</a></li>
         </ul>
       </div>
       <div class="foot-col foot-contact">
@@ -1437,6 +1531,12 @@ fetch('assets/us-map.svg').then(r=>r.text()).then(svg=>{
     });
   });
 }).catch(()=>{});
+
+// ---------- Interest preselect (sponsor tiers, partner CTA, join card) ----------
+document.querySelectorAll('[data-interest]').forEach(el=>el.addEventListener('click',()=>{
+  const sel=document.getElementById('interest');
+  if(sel)[...sel.options].forEach(o=>{if(o.text===el.dataset.interest)sel.value=o.text});
+}));
 
 // ---------- FAQ accordion ----------
 document.querySelectorAll('.faq-q').forEach(q=>q.addEventListener('click',()=>{
